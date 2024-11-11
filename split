@@ -1,3 +1,25 @@
+--------------------if want to hide blank li 
+{% assign descriptions = product.description | split: "<!-- split -->" %}
+<ul class="accordion-list container container_des">
+   <li class="custom-tab-li">
+    <h3>Description</h3>
+    <div class="answer">
+      <p>{{ descriptions[0] | split: "ANAX Offers:" }}</p>
+    </div>
+  </li>
+  
+  {% assign care_instructions = descriptions[1] | split: "Product Description:" %}
+  {% if care_instructions[0] != blank %}
+    <li class="ps-care custom-tab-li">
+      <h3>CARE INSTRUCTIONS</h3>
+      <div class="answer">
+        <p>{{ care_instructions[0] }}</p>
+      </div> 
+    </li>
+  {% endif %}
+</ul>
+
+//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 {% assign descriptions = product.description | split: "<!-- split -->" %}
 <ul class="accordion-list">
    <li class="custom-tab-li">
