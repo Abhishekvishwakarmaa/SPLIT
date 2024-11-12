@@ -1,0 +1,104 @@
+<h3>PERFECT FOR...</h3>
+<div><p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo</p></div>
+<h3>INGREDIENTS</h3>
+<div data-mce-fragment="1">
+<div data-mce-fragment="1"><p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo</p></div>
+</div>
+<h3>DELIVERY</h3>
+<div data-mce-fragment="1">
+<div data-mce-fragment="1"><p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo</p></div>
+</div>
+<h3>FREQUENTLY ASKED</h3>
+<div data-mce-fragment="1">
+<div data-mce-fragment="1"><p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo</p></div>
+</div>
+
+
+
+
+
+
+
+
+{% assign descriptions = product.description | split: "<h3>" %}
+<ul class="accordion-list">
+{% for desc in descriptions %}
+   {% if forloop.index == 1 %}
+     {{ desc }}
+    {% else %} 
+      <li class="custom-tab-li">
+         <h3>{{ desc | split: '</h3>' | first }}</h3>
+         <div class="answer">
+            <p>{{ desc | split: '</h3>' | last | prepend: '</h3>' }}</p>
+          </div>
+     </li>
+   {% endif %}  
+{% endfor %}
+</ul>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/material-design-iconic-font/2.2.0/css/material-design-iconic-font.min.css">
+<script>
+  $(document).ready(function(){
+  $('.accordion-list > li > .answer').hide();
+    
+  $('.accordion-list > li').click(function() {
+    if ($(this).hasClass("active")) {
+      $(this).removeClass("active").find(".answer").slideUp();
+    } else {
+      $(".accordion-list > li.active .answer").slideUp();
+      $(".accordion-list > li.active").removeClass("active");
+      $(this).addClass("active").find(".answer").slideDown();
+    }
+    return false;
+  });
+  
+});
+</script>
+
+<style>
+ul.accordion-list {
+  list-style: none;
+}
+ul.accordion-list li.custom-tab-li {
+  padding: 34px 0px;
+  border-top: 1px solid #dddddd;
+}
+ul.accordion-list li.custom-tab-li.active h3:after {
+  transform: rotate(45deg);
+}
+ul.accordion-list li.custom-tab-li h3 {
+  position: relative;
+  margin: 0; 
+  font-size: 13px;
+  letter-spacing: 0.2em;
+  cursor: pointer;
+  text-transform: uppercase;
+}
+ul.accordion-list li.custom-tab-li h3:after {
+  content: "";
+  font-family: "material-design-iconic-font";
+  position: absolute;
+  right: 0;
+  top: 0;
+  color: #666666;
+  transition: all 0.3s ease-in-out;
+  font-size: 20px;
+}
+@media screen and (min-width: 768px) {
+li.custom-tab-li:last-child {
+    border-bottom: 1px solid #dddddd;
+}
+}
+@media screen and (max-width: 767px) {
+.Product__Tabs {
+    margin: 0;
+}
+ul.accordion-list li.custom-tab-li {
+    padding: 24px 0px;
+}
+ul.accordion-list {
+    margin-top: 2rem;
+}
+}
+</style>
